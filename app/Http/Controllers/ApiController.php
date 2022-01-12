@@ -17,61 +17,103 @@ class ApiController extends Controller{
     function home_event($id = null){
         $data   = array();
         if(empty($id )){
-            $data['story'] = DB::table('stories')
-            ->join('images','stories.id',"=",'images.story_id')
-            ->where(['recent'=>0,'status'=>0])
-            ->groupBy('images.story_id')
-            ->get();
+            $data['story']  = DB::table('stories')
+                                ->join('images','stories.id',"=",'images.story_id')
+                                ->where(['recent'=>0,'status'=>0])
+                                ->groupBy('images.story_id')
+                                ->get();
             
         }else{
-            $data['story'] = DB::table('stories')
-            ->join('images','stories.id',"=",'images.story_id')
-            ->where(['recent'=>0,'status'=>0])
-            ->get();
+            $data['story']  = DB::table('stories')
+                                ->join('images','stories.id',"=",'images.story_id')
+                                ->where(['recent'=>0,'status'=>0])
+                                ->get();
         }
-        return $data;
-        
-    }
 
-    function home_recent_event(){
-        $recentEvent = DB::table('stories')
-        ->join('images','stories.id',"=",'images.story_id')
-        ->where(['recent'=>0,'status'=>0])
-        ->groupBy('images.story_id')
-        ->get();
-        return $recentEvent;
-    } 
-
-    function home_blog(){
-        $data         = array();
-        $data['blog'] = DB::table('blogs')->get();
-        return $data;
-    }
-
-    function home_category($id = null){
+        $data['recentEvent'] = DB::table('stories')
+                                ->join('images','stories.id',"=",'images.story_id')
+                                ->where(['recent'=>0,'status'=>0])
+                                ->groupBy('images.story_id')
+                                ->get();
+        $data['blog']        = DB::table('blogs')->get();
 
         if(empty($id )){
             $data['category'] = DB::table('categories')->select('id','category_name')->where('is_deleted',0)->get();
-            $story            = DB::table('stories')
+            $data['story']    = DB::table('stories')
                                  ->join('images','stories.id',"=",'images.story_id')
                                  ->where(['status'=>0])
                                  ->groupBy('images.story_id')
                                  ->get();     
-            $data['story']    = $story; 
-           
         }else{
-            $story            = DB::table('stories')
-            ->join('images','stories.id',"=",'images.story_id')
-            ->where(['status'=>0 , 'images.story_id'=>$id])
-            ->get();     
-            $data['story']    = $story; 
-            // echo '<pre>';
-            // print_r($story);die;
-           
+            $data['story']     = DB::table('stories')
+                                ->join('images','stories.id',"=",'images.story_id')
+                                ->where(['status'=>0 , 'images.story_id'=>$id])
+                                ->get();     
         }
-       
+
+        $data['video']       = DB::table('videos')
+                                ->where(['recent'=>0, 'status' => 0 ])
+                                ->take(3)
+                                ->get();
+
+        $data['image']      = DB::table('banners')
+                                ->inRandomOrder()
+                                ->where('recent',0)
+                                ->select('path')
+                                ->get();
+
+        $data['banner']     = DB::table('banners')
+                                ->inRandomOrder()
+                                ->where('recent',1)
+                                ->select('path')
+                                ->get();
+
+        $data['teams']      = DB::table('teams')
+                                ->select('name','designation','about','path')
+                                ->get();                        
         return $data;
+        
     }
+
+    // function home_recent_event(){
+    //     $recentEvent = DB::table('stories')
+    //     ->join('images','stories.id',"=",'images.story_id')
+    //     ->where(['recent'=>0,'status'=>0])
+    //     ->groupBy('images.story_id')
+    //     ->get();
+    //     return $recentEvent;
+    // } 
+
+    // function home_blog(){
+    //     $data         = array();
+    //     $data['blog'] = DB::table('blogs')->get();
+    //     return $data;
+    // }
+
+    // function home_category($id = null){
+
+    //     if(empty($id )){
+    //         $data['category'] = DB::table('categories')->select('id','category_name')->where('is_deleted',0)->get();
+    //         $story            = DB::table('stories')
+    //                              ->join('images','stories.id',"=",'images.story_id')
+    //                              ->where(['status'=>0])
+    //                              ->groupBy('images.story_id')
+    //                              ->get();     
+    //         $data['story']    = $story; 
+           
+    //     }else{
+    //         $story            = DB::table('stories')
+    //         ->join('images','stories.id',"=",'images.story_id')
+    //         ->where(['status'=>0 , 'images.story_id'=>$id])
+    //         ->get();     
+    //         $data['story']    = $story; 
+    //         // echo '<pre>';
+    //         // print_r($story);die;
+           
+    //     }
+       
+    //     return $data;
+    // }
 
     function home_video(){
         $data          = array();

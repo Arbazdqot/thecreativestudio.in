@@ -20,8 +20,8 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="category_id" class="control-label mb-1">Category</label>
-                                    <select class="form-control w-100" aria-required="true" aria-invalid="false" name="category_id">
-                                        <option value="">Select</option>
+                                    <select class="form-control w-100" aria-required="true" aria-invalid="false" name="category_id" value="{{old('category_id')}}">
+                                        <option value="{{old('category_id')}}">Select</option>
                                         @foreach ($category as $data)
                                             <option value="{{$data->id}}" >{{ $data->category_name }} </option>               
                                         @endforeach   
@@ -39,7 +39,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="title" class="control-label mb-1">Title</label>
-                                <input id="title" name="title" type="text" class="form-control w-100" aria-required="true" aria-invalid="false" value="">
+                                <input id="title" name="title" type="text" class="form-control w-100" aria-required="true" aria-invalid="false" value="{{old('title')}}">
                                 @error('title')
                                 <span class="alert alert-danger">
                                     {{$message}}
@@ -52,7 +52,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="sub_title" class="control-label mb-1">Sub Title</label>
-                                <input id="sub_title" name="sub_title" type="text" class="form-control w-100" aria-required="true" aria-invalid="false" value="">
+                                <input id="sub_title" name="sub_title" type="text" class="form-control w-100" aria-required="true" aria-invalid="false" value="{{old('sub_title')}}">
                                 @error('sub_title')
                                 <p class="alert alert-danger">
                                     {{$message}}

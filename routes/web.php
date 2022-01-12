@@ -3,11 +3,11 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\StoryController;
 use App\Http\Controllers\BlogController;
-use App\http\Controllers\VideoController;
-use App\http\Controllers\CategoryController;
-use App\http\Controllers\UploadUserController;
-use App\http\Controllers\BannerController;
-use App\http\Controllers\TeamController;
+use App\Http\Controllers\VideoController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\UploadUserController;
+use App\Http\Controllers\BannerController;
+use App\Http\Controllers\TeamController;
 
 
 

@@ -175,7 +175,7 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">UPLOAD FILE:</h6>
                         <a class="collapse-item" href="{{url('admin/uploaduser')}}"> List</a>
-                        <a class="collapse-item" href="{{url('admin/uploaduser/manageuploadfile')}}"> Add</a>
+                        
                     </div>
                 </div>
             </li>

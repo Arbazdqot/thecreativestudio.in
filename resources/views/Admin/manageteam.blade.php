@@ -20,7 +20,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="name" class="control-label mb-1">Name</label>
-                                <input id="name" name="name" type="text" class="form-control w-100" aria-required="true" aria-invalid="false" value="">
+                                <input id="name" name="name" type="text" class="form-control w-100" aria-required="true" aria-invalid="false" value="{{old('name')}}">
                                 @error('name')
                                 <span class="alert alert-danger">
                                     {{$message}}
@@ -34,7 +34,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="designation" class="control-label mb-1">Designation</label>
-                                <input id="designation" name="designation" type="text" class="form-control w-100" aria-required="true" aria-invalid="false" value="">
+                                <input id="designation" name="designation" type="text" class="form-control w-100" aria-required="true" aria-invalid="false" value="{{old('designation')}}">
                                 @error('designation')
                                 <span class="alert alert-danger">
                                     {{$message}}
@@ -49,7 +49,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="about" class="control-label mb-1">About</label>
-                                <textarea id="about" name="about" type="text" class="form-control w-100" aria-required="true" aria-invalid="false" rows="6" cols="50"></textarea>
+                                <textarea id="about" name="about" type="text" class="form-control w-100" aria-required="true" aria-invalid="false" rows="6" cols="50">{{old('about')}}</textarea>
                                 @error('about')
                                 <span class="alert alert-danger">
                                     {{$message}}
@@ -65,7 +65,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="image" class="control-label mb-1">Image</label>
-                                <input type="file" name="image" id="image" class="form-control w-100">
+                                <input type="file" name="image" id="image" class="form-control w-100" value="{{old('image')}}">
                                 @error('image')
                                 <span class="alert alert-danger">
                                     {{$message}}

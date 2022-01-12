@@ -21,7 +21,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="blog_title" class="control-label mb-1">Title</label>
-                                <input id="blog_title" name="blog_title" type="text" class="form-control w-100" aria-required="true" aria-invalid="false" value="">
+                                <input id="blog_title" name="blog_title" type="text" class="form-control w-100" aria-required="true" aria-invalid="false" value="{{old('blog_title')}}">
                                 @error('blog_title')
                                 <span class="alert alert-danger">
                                     {{$message}}
@@ -35,7 +35,7 @@
                             <div class="form-group">
                                 <label for="blog_desc" class="control-label mb-1">Description</label>
                               
-                                <textarea name="blog_desc" class="form-control w-100" id="blog_desc" cols="30" rows="10"></textarea>
+                                <textarea name="blog_desc" class="form-control w-100" id="blog_desc" cols="30" rows="10">{{old('blog_desc')}}</textarea>
                                 @error('blog_desc')
                                 <span class="alert alert-danger">
                                     {{$message}}
@@ -50,7 +50,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="blog_img" class="control-label mb-1">Image</label>
-                                <input type="file" name="blog_img" id="blog_img" class="form-control w-100">
+                                <input type="file" name="blog_img" id="blog_img" class="form-control w-100" value="{{old('blog_desc')}}">
                             </div>
                         </div>
                     </div>
