@@ -84,11 +84,11 @@ class ApiController extends Controller{
     //     return $recentEvent;
     // } 
 
-    // function home_blog(){
-    //     $data         = array();
-    //     $data['blog'] = DB::table('blogs')->get();
-    //     return $data;
-    // }
+    function home_blog(){
+        $data         = array();
+        $data['blog'] = DB::table('blogs')->get();
+        return $data;
+    }
 
     // function home_category($id = null){
 
