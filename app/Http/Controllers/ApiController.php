@@ -90,30 +90,30 @@ class ApiController extends Controller{
         return $data;
     }
 
-    // function home_category($id = null){
+    function home_category($id = null){
 
-    //     if(empty($id )){
-    //         $data['category'] = DB::table('categories')->select('id','category_name')->where('is_deleted',0)->get();
-    //         $story            = DB::table('stories')
-    //                              ->join('images','stories.id',"=",'images.story_id')
-    //                              ->where(['status'=>0])
-    //                              ->groupBy('images.story_id')
-    //                              ->get();     
-    //         $data['story']    = $story; 
+        if(empty($id )){
+            $data['category'] = DB::table('categories')->select('id','category_name')->where('is_deleted',0)->get();
+            $story            = DB::table('stories')
+                                 ->join('images','stories.id',"=",'images.story_id')
+                                 ->where(['status'=>0])
+                                 ->groupBy('images.story_id')
+                                 ->get();     
+            $data['story']    = $story; 
            
-    //     }else{
-    //         $story            = DB::table('stories')
-    //         ->join('images','stories.id',"=",'images.story_id')
-    //         ->where(['status'=>0 , 'images.story_id'=>$id])
-    //         ->get();     
-    //         $data['story']    = $story; 
-    //         // echo '<pre>';
-    //         // print_r($story);die;
+        }else{
+            $story            = DB::table('stories')
+            ->join('images','stories.id',"=",'images.story_id')
+            ->where(['status'=>0 , 'images.story_id'=>$id])
+            ->get();     
+            $data['story']    = $story; 
+            // echo '<pre>';
+            // print_r($story);die;
            
-    //     }
+        }
        
-    //     return $data;
-    // }
+        return $data;
+    }
 
     function home_video(){
         $data          = array();
