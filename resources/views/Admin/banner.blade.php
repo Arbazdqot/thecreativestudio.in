@@ -17,7 +17,7 @@
             <button type="button" class="btn btn-success pull-right" style="float:right;"> Add Banner</button> 
         </a>
         <h1>Banner Details</h1>
-    </div>
+    </div>  
     <div class="card-body">
         <div class="table-responsive">
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
