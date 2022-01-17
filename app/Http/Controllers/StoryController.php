@@ -36,7 +36,6 @@ class StoryController extends Controller
         $request->validate([
             'category_id' => 'required',
             'title'       => 'required',
-            'sub_title'   => 'required',
             'image'       => 'required|mimes:png,jpg,jpeg,csv,txt,pdf|max:2048'
         ]);
   
