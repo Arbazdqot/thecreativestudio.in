@@ -136,11 +136,11 @@ class ApiController extends Controller{
 
     }
 
-    function banner(){
+    function banner(){ 
         $banner= DB::table('banners')
                             ->inRandomOrder()
                             ->where('recent',1)
-                            ->select('path')
+                            ->select('image','path')
                             ->get();
         return $banner;
     }
