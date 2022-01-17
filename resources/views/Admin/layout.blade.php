@@ -98,7 +98,7 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Banner :</h6>
                         <a class="collapse-item" href="{{url('admin/banner')}}"> List</a>
-                        <a class="collapse-item" href="{{url('admin/video/bannervideo')}}"> Add</a>
+                        
                     </div>
                 </div>
             </li>

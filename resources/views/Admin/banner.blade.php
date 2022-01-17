@@ -26,7 +26,6 @@
                         <th>S. No.</th>
                         <th>Image</th>
                         <th>Which</th>
-                        <th>Status</th>
                         <th>Action</th>
 
                     </tr>
@@ -50,14 +49,6 @@
                             @endif
                         </td>
                         
-                        <td>
-                            @if($data->status == 1)
-                                <a href="{{url('admin/banner/status/0')}}/{{$data->id}}"><button type="button" class="btn btn-danger">Deactive</button></a>
-                                @elseif($data->status ==0)
-                                    <a href="{{url('admin/banner/status/1')}}/{{$data->id}}"><button type="button" class="btn btn-success">Active</button></a>
-                            
-                            @endif
-                        </td>
                         <td>
                             {{-- <a href="{{url('admin/banner/banneredit/')}}/{{$data->id}}"><button type="button" class="btn btn-primary">Edit</button></a> --}}
                             <a href="{{url('admin/banner/delete/')}}/{{$data->id}}"><button type="button" class="btn btn-danger">Delete</button></a>

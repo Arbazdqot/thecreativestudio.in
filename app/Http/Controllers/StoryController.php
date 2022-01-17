@@ -10,7 +10,7 @@ use App\Models\Image;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
-
+use Tinify\Tinify;
 
 class StoryController extends Controller
 {
@@ -154,28 +154,29 @@ class StoryController extends Controller
 
     // Store Gallery Image
     public function galleryinsert(Request $request){
-        // echo 'die';die;
+        
         $fileName = '';
         $request->validate([
             'image'       => 'required',
-            'image.*'    => 'mimes:jpeg,png,jpg,gif,svg,pdf,csv|max:1024',
+            'image.*'    => 'mimes:jpeg,png,jpg,gif,svg,pdf,csv',
         ]);
         
         if($request->hasfile('image')){
             foreach($request->file('image') as $file){
 
-                $fileName     = $file->getClientOriginalName();
+                $fileName     = time().'.'.$file->getClientOriginalName();
                 // compress_image(PHOTO_BASE_URL,$fileName);
                 $file->move(public_path('uploads'), $fileName);
                 $imgData[]  = $fileName;
                 $image              = new Image();  
                 $image->story_id    = $request->input('id');;
                 $image->image_name  = $fileName;;
-                $image->path        = PHOTO_BASE_URL.$fileName;;
+                $image->path        = PHOTO_BASE_URL.$fileName;
                 $image->save();
+
+               
             }
 
-            // print_r(json_encode($imgData));die;
             
             // $fileName = time().'.'.$request->image->extension();  
             // $request->image->move(public_path('uploads'), $fileName);
@@ -186,5 +187,12 @@ class StoryController extends Controller
         $request->session()->flash('message','Image Not Added Succefully');
             // return redirect('admin/story');
         return redirect()->back()->with('message','Image Not Added Successful !');
+    }
+
+    public function imgdelete(Request $request ,$id){
+        $image = Image::where(['id'=>$id])->delete();
+        
+        $request->session()->flash('message','Story Deleted Succefully');
+        return redirect()->back()->with('message','Image Deleted Succefully');
     }
 }

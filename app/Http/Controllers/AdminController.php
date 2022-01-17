@@ -28,7 +28,7 @@ class AdminController extends Controller
     public function index(Request $request)
     {
         if($request->session()->has('ADMIN_LOGIN')){
-            return view('admin/dashboard');
+            return $this->dashboard();
         }else{
             $request->session()->flash('error','Excess Denied');
             return view('admin.login');

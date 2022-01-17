@@ -31,7 +31,7 @@ Route::get('home_recent_event', [ApiController::class,'home_recent_event']);
 Route::post('contact_us',       [ApiController::class,'contact_us']);
 Route::get('banner',           [ApiController::class,'banner']);
 Route::get('team',           [ApiController::class,'team']);
-
+Route::get('image_download/{fileName}', [ApiController::class,'image_download']);
 
 
 

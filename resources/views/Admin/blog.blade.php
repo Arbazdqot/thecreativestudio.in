@@ -35,8 +35,8 @@
                             <td>
                                 <img src=" {{asset('/uploads/'.$data->blog_img)}}" alt="" title="" style="width: 150px; height:150px;">
                             </td>
-                            <td>{{ Str::limit( $data->blog_title , 50)}}</td>
-                            <td>{{ Str::limit($data->blog_desc, 50) }}</td>
+                            <td>{{ Str::limit( $data->blog_title , 40)}}</td>
+                            <td>{{ Str::limit($data->blog_desc, 40) }}</td>
                             <td>
                                 @if($data->status == 0)
                                     <a href="{{url('admin/blog/status/1')}}/{{$data->id}}"><button type="button" class="btn btn-danger">Deactive</button></a>

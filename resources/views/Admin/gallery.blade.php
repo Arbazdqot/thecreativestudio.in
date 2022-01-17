@@ -49,7 +49,14 @@
     <div class="col-md-3"> 
         <div class="card">
             <div class="card-body">
-                <img src=" {{asset('/uploads/'.$data->image_name)}}" alt="" title="" class="img-fluid card-img">
+                <div class="card-imgs">
+                    
+                    <img src=" {{asset('/uploads/'.$data->image_name)}}" alt="" title="" class="img-fluid card-img">
+                    <a href="{{url('admin/story/imgdelete/')}}/{{$data->id}}">
+                        <button type="button" class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
+                    </a>
+                </div>
+               
             </div><br>
         </div>
     </div>

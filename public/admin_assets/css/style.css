@@ -21,6 +21,22 @@
   }
   
 }
+
+.card-imgs {
+  position: relative;
+}
+
+.card-imgs .btn-danger {
+  font-size: 13px;
+  font-weight: 600;
+  background: #f81300;
+  border-color: #f81300;
+  border-radius: 3px;
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  padding: 4px 8px;
+}
 /* .table{
   height: 650px;
   overflow-y:scroll ;

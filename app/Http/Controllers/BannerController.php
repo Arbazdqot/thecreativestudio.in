@@ -11,7 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
-
+use Tinify\Tinify;
 
 class BannerController extends Controller
 {
@@ -30,13 +30,13 @@ class BannerController extends Controller
         $fileName = '';
         $request->validate([
             'image'     => 'required',
-            'image *'   => 'mimes:jpeg,png,jpg,gif,svg,pdf,csv|max:1024'
+            'image *'   => 'mimes:jpeg,png,jpg,gif,svg,pdf,csv'
         ]);
         // print_r($request->image);die;
         if($request->hasfile('image')){
             foreach($request->file('image') as $file){
 
-                $fileName     = $file->getClientOriginalName();
+                $fileName     = time().'.'.$file->getClientOriginalName();
                 // compress_image(PHOTO_BASE_URL,$fileName);
                 $file->move(public_path('uploads'), $fileName);
                 $imgData[]  = $fileName;
@@ -46,29 +46,33 @@ class BannerController extends Controller
                 $banner->status        = 0;
                 if($request->input('recent')==0 && $request->input('recent') != ''){
                     $banner->recent    = $request->input('recent');
+                    $message           = "Banner Is Added Succefully";
                 }else{
                     $banner->recent    = '1';
+                    $message           =  "Image Is Added Succefully";
                 }
                 $banner->save();
+
+               
             }
 
             // print_r(json_encode($imgData));die;
             
             // $fileName = time().'.'.$request->image->extension();  
             // $request->image->move(public_path('uploads'), $fileName);
-            $request->session()->flash('message','Image Added Succefully');
-            return redirect()->back()->with('message','Image Added Succefully');
+            $request->session()->flash('message',$message);
+            return redirect('admin/banner');
         }
 
 
-        if(!empty($request->image)){
-            $fileName = time().'.'.$request->image->extension();  
-            $request->image->move(public_path('uploads'), $fileName);
-        }
+        // if(!empty($request->image)){
+        //     $fileName = time().'.'.$request->image->extension();  
+        //     $request->image->move(public_path('uploads'), $fileName);
+        // }
        
         
        
-        $request->session()->flash('message','banner Added Succefully');
+        $request->session()->flash('message','Image Not Added');
         return redirect('admin/banner'); 
 
     }
@@ -76,7 +80,7 @@ class BannerController extends Controller
     public function delete(Request $request ,$id){
         $model = Banner::find($id);
         $model->delete();
-        $request->session()->flash('message','banner Deleted Succefully');
+        $request->session()->flash('message','Banner Deleted Succefully');
         return redirect('admin/banner');
     }
 

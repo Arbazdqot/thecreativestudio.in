@@ -63,6 +63,8 @@ Route::group(['middleware'=>'admin_auth'],function(){
     Route::get('admin/story/managestory',[StoryController::class,'managestory']);
     Route::post('admin/story',[StoryController::class,'insert'])->name('story.insert');
     Route::get('admin/story/delete/{id}', [StoryController::class, 'delete']);
+    Route::get('admin/story/imgdelete/{id}', [StoryController::class, 'imgdelete']);
+
     Route::get('admin/story/status/{status}/{id}', [StoryController::class, 'status']);
     Route::get('admin/story/storyedit/{id}', [StoryController::class, 'storyedit']);
     Route::post('admin/story/update', [StoryController::class, 'update'])->name('story.update');
@@ -104,7 +106,7 @@ Route::group(['middleware'=>'admin_auth'],function(){
 
     Route::get('admin/banner',             [BannerController::class,'index']);
     Route::get('admin/banner/managebanner',[BannerController::class,'managebanner']);
-    Route::post('admin/banner',            [BannerController::class,'insert'])->name('banner.insert');
+    Route::post('admin/banner/insert',            [BannerController::class,'insert'])->name('banner.insert');
     Route::get('admin/banner/banneredit/{id}',[BannerController::class,'index']);
     Route::post('admin/banner',             [BannerController::class,'update'])->name('banner.update');
     Route::get('admin/banner/delete/{id}', [BannerController::class,'delete']);
