@@ -130,7 +130,7 @@ class ApiController extends Controller{
         $image= DB::table('banners')
                             ->inRandomOrder()
                             ->where('recent',0)
-                            ->select('path')
+                            ->select('image','path')
                             ->get();
         return $image;
 
