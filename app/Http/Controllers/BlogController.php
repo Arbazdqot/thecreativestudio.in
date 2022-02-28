@@ -11,7 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
-
+use Illuminate\Support\Facades\File;
 
 class BlogController extends Controller
 {
@@ -57,7 +57,11 @@ class BlogController extends Controller
     }
 
     public function delete(Request $request ,$id){
-        $model = Blog::find($id);
+        $model = Blog::findOrFail($id);
+        $destination = 'uploads/'.$model->blog_img;
+        if(File::exists($destination)){
+            File::delete($destination);
+        }
         $model->delete();
         $request->session()->flash('message','Blog Deleted Succefully');
         return redirect('admin/blog');

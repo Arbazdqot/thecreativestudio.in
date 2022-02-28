@@ -161,14 +161,11 @@ class ApiController extends Controller{
         $data->email   = $request->email;
         $data->message = $request->message;
         $data->date    = date("Y/m/d");
-
+        $user['to']= $request->email;
         if($data->save()){
-            $data1   = ['name'=>$data->name,'data'=>'Hello'.$data->name];
-            $user['to'] = $data->email;
-            Mail::send('mail',$data1,function($message) use ($user){
-                $message->to($user['to']);
-                $message->subject('Thanks!');
-            });
+            // Mail::send('mail', $data, function ($message) use ($user) {
+            //     $message->to($user['to'])->subject('hello');
+            // });
         }
 
         return ['message'=>'Form is Submited', "status"=> True];    

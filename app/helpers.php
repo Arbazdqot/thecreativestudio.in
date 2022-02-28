@@ -1,5 +1,5 @@
 <?php 
-    const PHOTO_BASE_URL = 'http://192.168.0.49:8000/uploads/';
+    const PHOTO_BASE_URL = "https://admin.thecreativestudio.in/v1/uploads/";
 
     if(!function_exists('compress_image')){
         function compress_image($root_path,$imagename){

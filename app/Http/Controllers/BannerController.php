@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Tinify\Tinify;
-
+use Illuminate\Support\Facades\File;
 class BannerController extends Controller
 {
    
@@ -30,7 +30,7 @@ class BannerController extends Controller
         $fileName = '';
         $request->validate([
             'image'     => 'required',
-            'image *'   => 'mimes:jpeg,png,jpg,gif,svg,pdf,csv'
+            'image *'   => 'mimes:jpeg,png,jpg,gif,svg,csv'
         ]);
         // print_r($request->image);die;
         if($request->hasfile('image')){
@@ -78,7 +78,11 @@ class BannerController extends Controller
     }
 
     public function delete(Request $request ,$id){
-        $model = Banner::find($id);
+        $model = Banner::findOrFail($id);
+        $destination = 'uploads/'.$model->image;
+        if(File::exists($destination)){
+            File::delete($destination);
+        }
         $model->delete();
         $request->session()->flash('message','Banner Deleted Succefully');
         return redirect('admin/banner');

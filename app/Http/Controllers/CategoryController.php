@@ -51,7 +51,8 @@ class CategoryController extends Controller
 
     public function delete(Request $request ,$id){
         $model = Category::find($id);
-        $model->delete();
+        $model->is_deleted =1;
+        $model->save();
         $request->session()->flash('message','Category Deleted Succefully');
         return redirect('admin/category');
     }

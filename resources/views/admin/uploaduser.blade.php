@@ -37,7 +37,7 @@
                         <tr>
                             <td>{{$i}}</td>
                             <td>{{ $data->name }}</td>
-                            <td>{{asset('http://192.168.0.49:8000/admin/uploaduser/download/'.$data->file)}}</td>
+                            <td>{{asset('https://admin.thecreativestudio.in/v1/admin/uploaduser/download/'.$data->file)}}</td>
                             <td >
                                 {{-- <a href="{{url('admin/uploaduser/uploaduseredit/')}}/{{$data->id}}"><button type="button" class="btn btn-primary">Edit</button></a> --}}
                                 <a href="{{url('admin/uploaduser/delete/')}}/{{$data->id}}"><button type="button" class="btn btn-danger">Delete</button></a>

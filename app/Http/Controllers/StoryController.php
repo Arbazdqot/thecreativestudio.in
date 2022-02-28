@@ -11,6 +11,7 @@ use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Tinify\Tinify;
+use Illuminate\Support\Facades\File;
 
 class StoryController extends Controller
 {
@@ -77,7 +78,12 @@ class StoryController extends Controller
         $model->delete();
       
         // Delete Image
-        $image = Image::where(['story_id'=>$model->id])->delete();
+        $image = Image::where(['story_id'=>$model->id]);
+        $destination = 'uploads/'.$image->image_name;
+        if(File::exists($destination)){
+            File::delete($destination);
+        }
+        $image->delete();
         
         $request->session()->flash('message','Story Deleted Succefully');
         return redirect('admin/story');
@@ -95,41 +101,35 @@ class StoryController extends Controller
 
     // Store Edit Data 
     public function update(Request $request){
+        
         $fileName = '';
         $id       = $request->input('id');
         if(!empty($request->image)){
             $fileName = time().'.'.$request->image->extension();  
             $request->image->move(public_path('uploads'), $fileName);
-        }else{
-            $image     = $request->input('img');
-            $fileName  = $image;
-        }
-    
-        // Image Update 
-        $image              = Image::findOrFail($id);
-        $image->story_id    = $id;
-        $image->image_name  = $fileName;
-        $image->path        = PHOTO_BASE_URL.$fileName;
-        $image->save();
-
-        // Story Update
-        $id                         = $request->input('id');
-        $story                      = Story::findOrFail($id);
-        if($request->input('category_id') != '' ){
-            $story->category_id     = $request->input('category_id');
-        }else{
-            $story->category_id     = $request->input('id');
+            // Image Update 
+            $image              = Image::findOrFail($id);
+            $image->story_id    = $id;
+            $image->image_name  = $fileName;
+            $image->path        = PHOTO_BASE_URL.$fileName;
+            $image->save();
         }
         
-        $story->title               = $request->input('title');
-        $story->sub_title           = $request->input('sub_title');
+// print_r($request->input('category_id'));die;
+// print_r($id);die;
+        // Story Update
+        $story                  = Story::findOrFail($id);
+        $story->category_id     = $request->input('category_id');
+        $story->title           = $request->input('title');
+        $story->sub_title       = $request->input('sub_title');
       
-        if($request->input('recent')== 0 && $request->input('recent') != ''){
-            
+        if($request->input('recent') != 0 && $request->input('recent') != ''){
+            $story->recent  = 1;
         }else{
             $story->recent  = 0;
         }
-        $story->update();
+        
+        $story->save();
         $request->session()->flash('message','Story Updated Succefully');
         return redirect('admin/story');
     }
@@ -189,7 +189,14 @@ class StoryController extends Controller
     }
 
     public function imgdelete(Request $request ,$id){
-        $image = Image::where(['id'=>$id])->delete();
+        $image = Image::findOrFail($id);
+        // echo '<pre>';
+        // print_r($image);die;
+        $destination = 'uploads/'.$image->image_name;
+        if(File::exists($destination)){
+            File::delete($destination);
+        }
+        $image->delete();
         
         $request->session()->flash('message','Story Deleted Succefully');
         return redirect()->back()->with('message','Image Deleted Succefully');
